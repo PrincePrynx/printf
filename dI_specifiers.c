@@ -53,11 +53,11 @@ write(1, &buffer[i], 1);
 }
 
 /**
-*_printf - Produces output according to a format.
+*_printf_ - Produces output according to a format.
 *@format: output
 *Return: format of output
 */
-int _printf(const char *format, ...)
+int _printf_(const char *format, ...)
 {
 int chara_print = 0;
 va_list list;
