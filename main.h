@@ -13,5 +13,4 @@
 int _printf(const char *format, ...);
 int _printf_(const char *format, ...);
 
-
 #endif
