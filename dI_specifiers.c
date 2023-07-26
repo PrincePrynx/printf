@@ -7,7 +7,7 @@
 *@c: character to be printed
 *Return: printed character
 */
-static void print_char(char c, int *chara_print)
+void print_char(char c, int *chara_print)
 {
 write(1, &c, 1);
 (*chara_print)++;
@@ -19,7 +19,7 @@ write(1, &c, 1);
 *@num: interger to be printed
 *Return: printed interger
 */
-static void print_integer(int num, int *chara_print)
+void print_integer(int num, int *chara_print)
 {
 char buffer[20];
 int i = 0;

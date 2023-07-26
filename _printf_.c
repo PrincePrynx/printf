@@ -7,7 +7,7 @@
 *@c: character to be printed
 *Return: inputted Character
 */
-static int _print_char(char c)
+int _print_char(char c)
 {
 	return (write(1, &c, 1));
 }
@@ -17,7 +17,7 @@ static int _print_char(char c)
 *@num: number to be printed
 *Return: inputted interger
 */
-static int _print_integer(int num)
+int _print_integer(int num)
 {
 	char buffer[20];
 	int i = 0;
