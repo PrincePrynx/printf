@@ -1,100 +1,39 @@
 #include "main.h"
-#include <unistd.h>
+
 
 /**
-*_print_char - Helper function to print a character.
-*
-*@c: character to be printed
-*Return: inputted Character
+* _printf - writes function that produces output according to a format
+* @format: is a character string
+* Return: the number of characters printed
 */
-int _print_char(char c)
-{
-	return (write(1, &c, 1));
-}
 
-/**
-* _print_integer - Helper function to print an integer.
-*@num: number to be printed
-*Return: inputted interger
-*/
-int _print_integer(int num)
-{
-	char buffer[20];
-	int i = 0;
-
-	if (num == 0)
-	{
-		buffer[i++] = '0';
-	}
-	else
-	{
-		if (num < 0)
-		{
-			write(1, "-", 1);
-			num = -num;
-		}
-
-		while (num > 0)
-		{
-			buffer[i++] = (num % 10) + '0';
-			num /= 10;
-		}
-	}
-
-	while (i > 0)
-	{
-		i--;
-		write(1, &buffer[i], 1);
-	}
-
-	return (i);
-}
-
-/**
-*_printf - Produces output according to a format.
-*@format : output format
-*Return: printed character
-*/
 int _printf(const char *format, ...)
 {
-	int chara_print = 0;
-	va_list list;
+	int ch_print;
+	sample_t f_list[] = {
+		{"c", print_char},
+		{"s", print_string},
+		{"%", print_percent},
+		{"d", print_integer},
+		{"i", print_integer},
+		{"b", print_binary},
+		{"u", unsigned_integer},
+		{"o", print_octal},
+		{"x", print_hexlower},
+		{"X", print_heXupper},
+		{"r", print_reverser},
+		{"R", rot13},
+		{NULL, NULL}
+	};
+	va_list arg_list;
 
 	if (format == NULL)
 		return (-1);
 
-	va_start(list, format);
+	va_start(arg_list, format);
 
-	while (*format)
-	{
-		if (*format != '%')
-		{
-			chara_print += _print_char(*format);
-		}
-		else
-		{
-			format++;
-			if (*format == '\0')
-				break;
-
-			if (*format == '%')
-			{
-				chara_print += _print_char(*format);
-			}
-			else if (*format == 'd' || *format == 'i')
-			{
-				int num = va_arg(list, int);
-
-				chara_print += _print_integer(num);
-
-			}
-		}
-
-		format++;
-	}
-
-	va_end(list);
-
-	return (chara_print);
+	ch_print = parse(format, f_list, arg_list);
+	va_end(arg_list);
+	return (ch_print);
 }
 
